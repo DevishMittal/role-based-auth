@@ -1,19 +1,15 @@
 import { useState } from "react";
-import { api } from "../utils/api";
+import { useAuth } from "../context/AuthContext";
 
 const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("user");
+  const { register } = useAuth();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      await api.post("/api/auth/register", { username, password, role });
-      alert("User registered successfully!");
-    } catch (error) {
-      console.error("Registration failed:", error);
-    }
+    register(username, password, role);
   };
 
   return (
