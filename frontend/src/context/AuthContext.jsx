@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
       setToken(response.data.token);
       localStorage.setItem("token", response.data.token);
       setUser(response.data.user);
-      navigate("/dashboard"); // Use navigate to redirect
+      navigate("/"); // Use navigate to redirect
     } catch (error) {
       console.error("Login failed:", error);
     }
