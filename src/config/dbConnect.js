@@ -1,14 +1,17 @@
-const mongoose = require("mongoose");
+const mysql = require("mysql2/promise");
 
-const dbConnect = async () => {
-    try {
-        const connect = await mongoose.connect(process.env.CONNECTION_STRING);
-        console.log(`Database connected : ${connect.connection.host}, ${connect.connection.name}`);
-    }
-    catch (err) {
-        console.log(err);
-        process.exit(1);
-    }
-};
+const pool = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: 3306, // Explicitly set port
+  waitForConnections: true,
+  connectionLimit: 10,
+  connectTimeout: 10000, // 10-second timeout
+  ssl: {
+    rejectUnauthorized: false, // Required for Hostinger
+  },
+});
 
-module.exports = dbConnect;
+module.exports = pool;

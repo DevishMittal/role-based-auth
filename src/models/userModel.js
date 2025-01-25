@@ -1,22 +1,21 @@
-const mongoose = require("mongoose");
+const pool = require("../config/dbConnect");
 
-const userSchema = new mongoose.Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-    role: {
-        type: String,
-        required: true,
-        enum: ["admin", "manager", "user"]
-    },
-}, {
-    timestamps: true,
-});
+class User {
+  static async create({ username, password, role }) {
+    const [result] = await pool.execute(
+      "INSERT INTO users (username, password, role) VALUES (?, ?, ?)",
+      [username, password, role]
+    );
+    return result.insertId; // Returns the new user’s ID
+  }
 
-module.exports = mongoose.model("User", userSchema);
+  static async findByUsername(username) {
+    const [rows] = await pool.execute(
+      "SELECT * FROM users WHERE username = ?",
+      [username]
+    );
+    return rows[0]; // Returns the user object or undefined
+  }
+}
+
+module.exports = User;
