@@ -22,6 +22,7 @@ const Login = () => {
           onChange={(e) => setUsername(e.target.value)}
           className="block w-full p-2 mb-4 border rounded"
         />
+
         <input
           type="password"
           placeholder="Password"
@@ -29,7 +30,11 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           className="block w-full p-2 mb-4 border rounded"
         />
-        <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">
+
+        <button
+          type="submit"
+          className="w-full bg-blue-500 text-white p-2 rounded"
+        >
           Login
         </button>
       </form>

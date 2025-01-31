@@ -11,7 +11,10 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      const response = await api.post("/api/auth/login", { username, password });
+      const response = await api.post("/api/auth/login", {
+        username,
+        password,
+      });
       setToken(response.data.token);
       localStorage.setItem("token", response.data.token);
 
@@ -29,7 +32,11 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (username, password, role) => {
     try {
-      const response = await api.post("/api/auth/register", { username, password, role });
+      const response = await api.post("/api/auth/register", {
+        username,
+        password,
+        role,
+      });
       console.log("User registered:", response.data); // Log the registration response
 
       // Automatically log in the user after registration

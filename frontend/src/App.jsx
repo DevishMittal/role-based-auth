@@ -24,6 +24,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/manager"
           element={
@@ -32,6 +33,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/user"
           element={
